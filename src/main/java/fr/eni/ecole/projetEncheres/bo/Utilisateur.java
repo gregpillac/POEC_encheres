@@ -38,6 +38,8 @@ public class Utilisateur {
 	@NotBlank
 	private boolean administrateur = false;
 	
+	
+	
 	public Utilisateur() {
 	}
 
