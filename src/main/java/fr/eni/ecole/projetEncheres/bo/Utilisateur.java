@@ -5,9 +5,10 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Utilisateur {
@@ -32,9 +33,9 @@ public class Utilisateur {
 	private String ville;
 	@NotBlank
 	private String motDePasse;
-	@NotBlank
+	@NotNull
 	private int credit = 0;
-	@NotBlank
+	@NotNull
 	private boolean administrateur = false;
 	
 	public Utilisateur() {

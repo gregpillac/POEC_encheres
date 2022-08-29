@@ -1,5 +1,7 @@
 package fr.eni.ecole.projetEncheres.bll;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,8 @@ public class GestionUtilisateur {
 		dao.save(u);
 	}
 
+	public List<Utilisateur> listeUtilisateurs() {
+		List<Utilisateur> utilisateurs = dao.findAll();
+		return utilisateurs;
+	}
 }
