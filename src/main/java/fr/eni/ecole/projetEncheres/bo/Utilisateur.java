@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.lang.NonNull;
 
 @Entity
 public class Utilisateur {
@@ -24,7 +23,7 @@ public class Utilisateur {
 	private String prenom;
 	@NotBlank
 	private String email;
-	private String telephone;
+	private String telephone = null;
 	@NotBlank
 	private String rue;
 	@NotBlank
@@ -42,7 +41,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String codePostal, String ville, String motDePasse) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -52,8 +51,6 @@ public class Utilisateur {
 		this.codePostal = codePostal;
 		this.ville = ville;
 		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
 	}
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
@@ -184,7 +181,38 @@ public class Utilisateur {
 				&& Objects.equals(pseudo, other.pseudo);
 	}
 
-	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Utilisateur [noUtilisateur=");
+		builder.append(noUtilisateur);
+		builder.append(", pseudo=");
+		builder.append(pseudo);
+		builder.append(", nom=");
+		builder.append(nom);
+		builder.append(", prenom=");
+		builder.append(prenom);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", telephone=");
+		builder.append(telephone);
+		builder.append(", rue=");
+		builder.append(rue);
+		builder.append(", codePostal=");
+		builder.append(codePostal);
+		builder.append(", ville=");
+		builder.append(ville);
+		builder.append(", motDePasse=");
+		builder.append(motDePasse);
+		builder.append(", credit=");
+		builder.append(credit);
+		builder.append(", administrateur=");
+		builder.append(administrateur);
+		builder.append("]");
+		return builder.toString();
+	}
 
+	
+	
 
 }
