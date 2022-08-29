@@ -7,8 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0dfea0af66165c1aff6e4b7c545f4b6e982f3743
 
 @Entity
 public class Utilisateur {
@@ -33,9 +37,9 @@ public class Utilisateur {
 	private String ville;
 	@NotBlank
 	private String motDePasse;
-	@NotBlank
+	@NotNull
 	private int credit = 0;
-	@NotBlank
+	@NotNull
 	private boolean administrateur = false;
 	
 	

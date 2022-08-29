@@ -2,6 +2,8 @@ package fr.eni.ecole.projetEncheres;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +38,14 @@ class GestionUtilisateurTest {
 		assertNotNull(tata);
 		System.out.println(tata.toString());
 		
-		// beanGestionUser.creerUtilisateur(toto);
+		beanGestionUser.creerUtilisateur(toto);
+		assertTrue(toto.getNoUtilisateur()>0);
+		
+		beanGestionUser.creerUtilisateur(tata);
+		assertTrue(tata.getNoUtilisateur()>1);
+		
+		List<Utilisateur> utilisateurs = beanGestionUser.listeUtilisateurs();
+		assertTrue(utilisateurs.size()==2);
 		
 	}
 
