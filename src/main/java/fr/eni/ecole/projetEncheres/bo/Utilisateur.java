@@ -9,10 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 0dfea0af66165c1aff6e4b7c545f4b6e982f3743
 
 @Entity
 public class Utilisateur {
