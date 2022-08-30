@@ -2,7 +2,7 @@ package fr.eni.ecole.projetEncheres;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
+
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,15 @@ import fr.eni.ecole.projetEncheres.bo.Utilisateur;
 @ComponentScan({ "fr.eni.ecole.projetEncheres.bll",
 	"fr.eni.ecole.projetEncheres.dal",
 	"fr.eni.ecole.projetEncheres.bo"})
+
 class GestionUtilisateurTest {
 	
 	@Autowired
 	private GestionUtilisateur beanGestionUser;
 	
-
+/*
 	@Test
-	public void testCreerUtilisateur() {
+	public void test01CreerUtilisateur() {
 		
 		Utilisateur toto = new Utilisateur(
 				"Toto", "NomToot", "PrenomToto", "toto@toto.com", "06254658965",
@@ -48,5 +49,39 @@ class GestionUtilisateurTest {
 		assertTrue(utilisateurs.size()==2);
 		
 	}
+	*/
+	@Test
+	public void test02TrouverUnUtilisateurParPseudo() {
+		Utilisateur u = beanGestionUser.trouverUtilisateurByLogin("Toto");
+		assertNotNull(u);
+		System.err.println(u.toString());
+		Utilisateur u1 = beanGestionUser.trouverUtilisateurByLogin("titi");
+		assertNull(u1);
+	}
+	
+	@Test
+	public void test03TrouverUnUtilisateurParId() {
+		
+	}
+	
+	@Test
+	public void test04SupprimerUtilisateur() {
+		Utilisateur tata = new Utilisateur(
+				"Tata", "NomTata", "PrenomTata", "tata@toto.com", null,
+				"rue de la Tata", "17000", "TataVille", "tata17");
+		beanGestionUser.supprimerUtilisateur(tata);
+		System.err.println(tata.toString());		
+	}
+	
+	@Test
+	public void test05ModififierUtilisateur() {
+		Utilisateur toto = beanGestionUser.trouverUtilisateurByLogin("Toto");
+		toto.setPrenom("Antonin");
+		beanGestionUser.modifierUtilisateur(toto);
+		}
+	
+	
+	
+	
 
 }

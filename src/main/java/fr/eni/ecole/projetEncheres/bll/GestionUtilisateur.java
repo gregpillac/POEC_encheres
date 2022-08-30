@@ -22,4 +22,37 @@ public class GestionUtilisateur {
 		List<Utilisateur> utilisateurs = dao.findAll();
 		return utilisateurs;
 	}
+	
+	public void supprimerUtilisateur(Utilisateur u) {
+		Utilisateur uTrouve = trouverUtilisateurByLogin(u.getPseudo());
+		if (uTrouve!=null) {
+			dao.deleteById(uTrouve.getNoUtilisateur());;
+			System.err.println("utilisateur supprimé " + uTrouve);
+		} else {
+			System.err.println("L'utilisateur n'existe pas");
+		}			
+	}
+	
+	public Utilisateur trouverUtilisateurByLogin(String login) {
+		Utilisateur u = null;
+		Utilisateur uPseudo = dao.findByPseudo(login);
+		Utilisateur uMail = dao.findByEmail(login);
+		if (uPseudo != null) {
+			u = uPseudo; 
+		} else if( uMail != null) {
+			u = uMail; 
+		} 
+		return u;
+	}
+	
+	public void modifierUtilisateur(Utilisateur u) {
+		Utilisateur uTrouve = trouverUtilisateurByLogin(u.getPseudo());
+		if (uTrouve!= null) {
+			dao.save(u);
+			System.err.println("utilisateur modifié");
+		} else {
+			System.err.println("L'utilisateur n'existe pas");
+		}			
+	}
+	
 }

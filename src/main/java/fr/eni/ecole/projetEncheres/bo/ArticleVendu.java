@@ -2,16 +2,35 @@ package fr.eni.ecole.projetEncheres.bo;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
+
+@Entity
 public class ArticleVendu {
-	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int noArticle;
+	@NotBlank
 	private String nomArticle;
+	@NotBlank
 	private String description;
+	@NotBlank
 	private LocalDate dateDebutEncheres;
+	@NotBlank
 	private LocalDate dateFinEncheres;
+	@NotBlank
 	private int miseAPrix;
 	private int prixVente;
 	private String etatVente;
+	
+	@ManyToOne
+	private Utilisateur vendeur;
+	@ManyToOne
+	private Categorie categorie;
 	
 	public ArticleVendu() {
 	}

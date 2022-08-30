@@ -1,17 +1,27 @@
 package fr.eni.ecole.projetEncheres.bo;
 
-import java.util.List;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author sbodin2022
  *
  */
+@Entity
 public class Categorie {
-
+	
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int noCategorie;
+	@NotBlank
 	private String libelle;
 
-	private List<ArticleVendu> articles;
+	
 
 	/**
 	 * 
@@ -23,8 +33,7 @@ public class Categorie {
 	 * @param noCategorie
 	 * @param libelle
 	 */
-	public Categorie(int noCategorie, String libelle) {
-		this.noCategorie = noCategorie;
+	public Categorie(String libelle) {		
 		this.libelle = libelle;
 	}
 
@@ -33,11 +42,11 @@ public class Categorie {
 	 * @param libelle
 	 * @param articles
 	 */
-	public Categorie(int noCategorie, String libelle, List<ArticleVendu> articles) {
+	public Categorie(int noCategorie, String libelle) {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
-		this.articles = articles;
 	}
+		
 
 	// autres méthodes
 
