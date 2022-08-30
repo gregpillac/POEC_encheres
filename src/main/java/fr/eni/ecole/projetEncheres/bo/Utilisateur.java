@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
+
 @Entity
 public class Utilisateur {
 
@@ -37,6 +38,8 @@ public class Utilisateur {
 	private int credit = 0;
 	@NotNull
 	private boolean administrateur = false;
+	
+	
 	
 	public Utilisateur() {
 	}

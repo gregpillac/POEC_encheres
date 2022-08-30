@@ -6,4 +6,8 @@ import fr.eni.ecole.projetEncheres.bo.Utilisateur;
 
 public interface UtilisateurDAO extends JpaRepository<Utilisateur, Integer>{
 
+	Utilisateur findByPseudo(String pseudo);
+
+	Utilisateur findByEmail(String login);
+
 }
