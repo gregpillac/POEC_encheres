@@ -3,29 +3,38 @@ package fr.eni.ecole.projetEncheres.bo;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ArticleVendu {
+	
+	private enum EtatVente {CREEE, ENCOURS, TERMINEE, RETIREE};
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private int noArticle;
-	@NotBlank
+	@NotNull
 	private String nomArticle;
-	@NotBlank
+	@NotNull
 	private String description;
-	@NotBlank
+	@NotNull
 	private LocalDate dateDebutEncheres;
-	@NotBlank
+	@NotNull
 	private LocalDate dateFinEncheres;
-	@NotBlank
+	@NotNull
 	private int miseAPrix;
-	private int prixVente;
-	private String etatVente;
+	@NotNull
+	private int prixVente = miseAPrix;
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private EtatVente etatVente = EtatVente.CREEE;
 	
 	@ManyToOne
 	private Utilisateur vendeur;
@@ -36,7 +45,7 @@ public class ArticleVendu {
 	}
 	
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
-			int miseAPrix, int prixVente, String etatVente) {
+			int miseAPrix, int prixVente, EtatVente etatVente) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
@@ -47,7 +56,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, EtatVente etatVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -100,10 +109,10 @@ public class ArticleVendu {
 	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
-	public String getEtatVente() {
+	public EtatVente getEtatVente() {
 		return etatVente;
 	}
-	public void setEtatVente(String etatVente) {
+	public void setEtatVente(EtatVente etatVente) {
 		this.etatVente = etatVente;
 	}
 	
