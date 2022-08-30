@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.eni.ecole.projetEncheres.bo.Categorie;
 import fr.eni.ecole.projetEncheres.bo.Utilisateur;
 import fr.eni.ecole.projetEncheres.dal.UtilisateurDAO;
 
@@ -15,8 +16,12 @@ public class GestionUtilisateur {
 	UtilisateurDAO dao;
 	
 	public void creerUtilisateur(Utilisateur u) {
-		dao.save(u);
-	}
+		Utilisateur userToFind = dao.findByPseudo(u.getPseudo());
+		if ( userToFind != null) {
+			dao.save(u);
+		} else {
+			System.err.println("L'utilisateur existe déjà");
+		}	}
 
 	public List<Utilisateur> listeUtilisateurs() {
 		List<Utilisateur> utilisateurs = dao.findAll();
