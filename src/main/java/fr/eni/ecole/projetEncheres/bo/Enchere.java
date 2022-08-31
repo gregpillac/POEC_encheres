@@ -1,24 +1,32 @@
 package fr.eni.ecole.projetEncheres.bo;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Enchere {
 
+	// ajout d'un id pour esquiver la cle composite
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;
 	@NotNull
 	private LocalDate dateEnchere;
 	@NotNull
 	private int montant_enchere;
 
 	@NotNull
-	@OneToMany
+	@OneToOne // modif en one to one
 	private ArticleVendu article;
 	@NotNull
-	@OneToMany
+	@OneToOne // modif en one to one
 	private Utilisateur utilisateur;
 
 	/**
@@ -123,4 +131,27 @@ public class Enchere {
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(article, utilisateur);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Enchere other = (Enchere) obj;
+		return Objects.equals(article, other.article) && Objects.equals(utilisateur, other.utilisateur);
+	}
+
+
+
+
+	
+	
 }

@@ -3,6 +3,8 @@ package fr.eni.ecole.projetEncheres;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -46,23 +48,64 @@ class GestionArticleTest {
 		
 		Categorie c = beanGestionCate.trouverCategorieByLibelle("Loisir");
 		assertNotNull(c);
-		System.err.println(u.toString());
+		System.err.println(c.toString());
 		
-		LocalDate dateDebut = LocalDate.of(2022, 9, 5);
-		LocalDate dateFin = LocalDate.of(2022, 9, 25);
-		
-		System.err.println(dateDebut);
-		System.err.println(dateFin);
-
 		Retrait r = new Retrait("3 rue du Retrait", "79000", "Niort");
 		beanGestionRetrait.creerRetrait(r);
-		ArticleVendu a = new ArticleVendu("cd", "cd ACDC", dateDebut, dateFin, 20, u, c, r);
+		
+		ArticleVendu a = new ArticleVendu(
+				"cd",
+				"cd ACDC",
+				LocalDate.of(2022, 9, 5),
+				LocalDate.of(2022, 9, 25),
+				20,
+				u,
+				c,
+				r);
 		beanGestionArticle.creerArticle(a);
-		
-		Optional<ArticleVendu> a2 = beanGestionArticle.chercherArticleById(1);
+				
+		Optional<ArticleVendu> a2 = beanGestionArticle.trouverArticleById(a.getNoArticle());
 		assertNotNull(a2);
-		System.err.println(a);	
+		System.err.println(a2);		
+	}
+	
+	@Test
+	void test02ListerArticles() {		
+		List<ArticleVendu> articles = beanGestionArticle.listeArticles();
+		assertTrue(articles.size() > 0);
+	}
+	
+	@Test
+	void test03ModifierArticle() throws Exception {
+		List<ArticleVendu> articles = beanGestionArticle.listeArticles();
+		int firstId = articles.get(0).getNoArticle();
+
+		ArticleVendu avantModif = beanGestionArticle.trouverArticleById(firstId).get();
+		avantModif.setPrixVente(0);
+		beanGestionArticle.modifierArticleById(avantModif);	
 		
+		ArticleVendu aModifier = beanGestionArticle.trouverArticleById(firstId).get();
+		aModifier.setPrixVente(100);;
+		beanGestionArticle.modifierArticleById(aModifier);
+		
+		ArticleVendu apresModif = beanGestionArticle.trouverArticleById(firstId).get();
+		
+		assertNotEquals(avantModif.getPrixVente(), apresModif.getPrixVente());
+		System.err.println("Prix avant : " + avantModif.getPrixVente());
+		System.err.println("Prix apres : " + apresModif.getPrixVente());
+	}
+	
+	@Test
+	void test04SupprimerArticle() throws Exception {
+		List<ArticleVendu> articles = beanGestionArticle.listeArticles();
+		int firstId = articles.get(0).getNoArticle();
+		
+		ArticleVendu artToDelete = beanGestionArticle.trouverArticleById(firstId).get();
+		
+		beanGestionArticle.supprimerArticle(artToDelete);
+		Optional<ArticleVendu> artDeleted = beanGestionArticle.trouverArticleById(firstId);
+		
+		assertTrue(artDeleted.isEmpty());
 	}
 
 }
