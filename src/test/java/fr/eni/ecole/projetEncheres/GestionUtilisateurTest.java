@@ -2,7 +2,7 @@ package fr.eni.ecole.projetEncheres;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,6 @@ class GestionUtilisateurTest {
 	@Autowired
 	private GestionUtilisateur beanGestionUser;
 	
-/*
 	@Test
 	public void test01CreerUtilisateur() {
 		
@@ -49,7 +48,8 @@ class GestionUtilisateurTest {
 		assertTrue(utilisateurs.size()==2);
 		
 	}
-	*/
+	
+
 	@Test
 	public void test02TrouverUnUtilisateurParPseudo() {
 		Utilisateur u = beanGestionUser.trouverUtilisateurByLogin("Toto");
@@ -79,9 +79,4 @@ class GestionUtilisateurTest {
 		toto.setPrenom("Antonin");
 		beanGestionUser.modifierUtilisateur(toto);
 		}
-	
-	
-	
-	
-
 }
