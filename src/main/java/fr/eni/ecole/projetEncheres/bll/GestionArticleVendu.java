@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.eni.ecole.projetEncheres.bo.ArticleVendu;
+import fr.eni.ecole.projetEncheres.bo.ArticleVendu.EtatVente;
 import fr.eni.ecole.projetEncheres.dal.ArticleVenduDAO;
 
 @Service
@@ -33,7 +34,7 @@ public class GestionArticleVendu {
 		return article;
 	}
 	
-	public void modifierArticleById (ArticleVendu art) throws Exception {
+	public void modifierArticle (ArticleVendu art) throws Exception {
 		Optional<ArticleVendu> articleToFind = dao.findById(art.getNoArticle());
 		if (articleToFind.isPresent()) {
 			ArticleVendu article = articleToFind.get();
@@ -45,7 +46,7 @@ public class GestionArticleVendu {
 		} else {
 			throw new Exception("Article non present");
 		}
-		//TODO : gerer les exceptions de modifArticle
+		//TODO : gerer les exceptions de modifArticle ou condition dans Controller
 	}
 	
 	public void supprimerArticle (ArticleVendu art) throws Exception {
@@ -62,6 +63,29 @@ public class GestionArticleVendu {
 			throw new Exception("Article non present");
 		}
 		//TODO : gerer les exceptions de suppressionArticle
+	}
+	
+	public void majEtatdeVente() throws Exception{
+		// TODO : gerer l'etat de vente en batch ou procedure stockée ??
+
+		List<ArticleVendu> articles = dao.findAll();
+		LocalDate now = LocalDate.now();
+		for (ArticleVendu a : articles) {
+			if (a.getDateFinEncheres().isEqual(now) || a.getDateFinEncheres().isBefore(now)) {
+				a.setEtatVente(EtatVente.TERMINEE);
+				modifierArticle(a);
+				System.err.println("passage en condition termine");
+			} else if (a.getDateDebutEncheres().isEqual(now) || a.getDateDebutEncheres().isBefore(now)) {
+				a.setEtatVente(EtatVente.ENCOURS);
+				modifierArticle(a);
+				System.err.println("passage en condition en cours");
+			} System.err.println("bordel");
+		}
+	}
+	
+	public void etatVenteRetire(ArticleVendu art) throws Exception {
+		art.setEtatVente(EtatVente.RETIREE);
+		modifierArticle(art);
 	}
 	
 }

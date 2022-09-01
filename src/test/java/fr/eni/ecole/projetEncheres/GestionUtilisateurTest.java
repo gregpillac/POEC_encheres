@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +16,7 @@ import fr.eni.ecole.projetEncheres.bo.Utilisateur;
 
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
 @ComponentScan({ "fr.eni.ecole.projetEncheres.bll",
 	"fr.eni.ecole.projetEncheres.dal",
 	"fr.eni.ecole.projetEncheres.bo"})
