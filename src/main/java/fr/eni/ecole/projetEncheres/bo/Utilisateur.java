@@ -72,7 +72,7 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-
+	
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}

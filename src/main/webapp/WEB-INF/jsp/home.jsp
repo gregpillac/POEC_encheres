@@ -2,7 +2,6 @@
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,33 +18,15 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-               <a href="welcome" class="navbar-brand active"> <span
-                    class="glyphicon glyphicon-education"></span>
-          </a>
-               <button class="navbar-toggle" type="button" data-toggle="collapse"
-                    data-target="#navbar-main">
-                   <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                        class="icon-bar"></span>
-             </button>
-        </div>
-           <div class="navbar-collapse collapse" id="navbar-main">
-               <ul class="nav navbar-nav navbar-right">
-                   <li><a href="deconnexion"><spring:message code="welcome.disconnection"/> </a></li>
-               </ul>
-           </div>
-        </div>
-    </nav>
 	<div class="container">
 		<div class="jumbotron">
 			<div class="row align-items-cente">
 				<h2 class="text-center">List Des Enchères</h2>
 				</br>
-				<form:form cssClass="form-horizontal" method="POST" action="/rechercher">
+				<form:form cssClass="form-horizontal" method="POST" action="rechercher">
 					<div class="col col-lg-6 col-md-12">
 						<div class="col-12">
+
 							<label for="exampleDataList" class="form-label">Filtres :</label>
 							<input class="form-control" list="datalistOptions"
 								id="exampleDataList" placeholder="Le nom de l'article ncontient">
@@ -74,8 +55,10 @@
 			</div>
 
 
+
+
+
 		</div>
 	</div>
-</body>
 	<jsp:include page="footer.jsp" />
 </html>
