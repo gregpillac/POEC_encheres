@@ -49,7 +49,7 @@ class GestionUtilisateurTest {
 		
 	}
 	
-
+/*
 	@Test
 	public void test02TrouverUnUtilisateurParPseudo() {
 		Utilisateur u = beanGestionUser.trouverUtilisateurByLogin("Toto");
@@ -79,4 +79,5 @@ class GestionUtilisateurTest {
 		toto.setPrenom("Antonin");
 		beanGestionUser.modifierUtilisateur(toto);
 		}
+	*/
 }

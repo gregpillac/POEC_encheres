@@ -17,7 +17,7 @@ public class GestionUtilisateur {
 	
 	public void creerUtilisateur(Utilisateur u) {
 		Utilisateur userToFind = dao.findByPseudo(u.getPseudo());
-		if ( userToFind != null) {
+		if ( userToFind == null) {
 			dao.save(u);
 		} else {
 			System.err.println("L'utilisateur existe déjà");
