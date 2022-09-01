@@ -16,12 +16,19 @@ public class GestionUtilisateur {
 	UtilisateurDAO dao;
 	
 	public void creerUtilisateur(Utilisateur u) {
-		Utilisateur userToFind = dao.findByPseudo(u.getPseudo());
-		if ( userToFind != null) {
+		
+		//TODO : ajout d'une double condition sur email et pseudo
+		Utilisateur userToFindByPseudo = dao.findByPseudo(u.getPseudo());
+		Utilisateur userToFindByEmail = dao.findByPseudo(u.getEmail());
+
+		if ( userToFindByPseudo == null && userToFindByEmail==null) {
 			dao.save(u);
-		} else {
-			System.err.println("L'utilisateur existe déjà");
-		}	}
+		} else if (userToFindByPseudo != null){
+			System.err.println(u.getPseudo() + " : ce pseudo est déjà utilisé");
+		} else if (userToFindByEmail != null){
+			System.err.println(u.getEmail() + " : cette adresse mail est déjà utilisée");
+		}
+	}
 
 	public List<Utilisateur> listeUtilisateurs() {
 		List<Utilisateur> utilisateurs = dao.findAll();
