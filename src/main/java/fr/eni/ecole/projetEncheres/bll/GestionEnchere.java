@@ -1,11 +1,13 @@
 package fr.eni.ecole.projetEncheres.bll;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fr.eni.ecole.projetEncheres.bo.ArticleVendu;
 import fr.eni.ecole.projetEncheres.bo.Enchere;
@@ -14,6 +16,7 @@ import fr.eni.ecole.projetEncheres.bo.ArticleVendu.EtatVente;
 import fr.eni.ecole.projetEncheres.bo.Categorie;
 import fr.eni.ecole.projetEncheres.dal.EnchereDAO;
 
+@Service
 public class GestionEnchere {
 	
 	@Autowired
@@ -84,40 +87,48 @@ public class GestionEnchere {
 	public Utilisateur dernierUtilisateurEnchere(ArticleVendu a) {
 		List<Enchere> encheres = Edao.findByArticle(a);		
 		int montantEnchereMax = 0;
-		Enchere enchereMax = null;		
-		for (Enchere e : encheres) {
-			if (e.getMontant_enchere()>montantEnchereMax){
-				montantEnchereMax=e.getMontant_enchere();
-				enchereMax = e;
-			}
-		}		
-		return enchereMax.getUtilisateur();
+		Enchere enchereMax = null;
+		if(!encheres.isEmpty()) {
+			for (Enchere e : encheres) {
+				if (e.getMontant_enchere()>montantEnchereMax){
+					montantEnchereMax=e.getMontant_enchere();
+					enchereMax = e;
+				}
+			}		
+		
+			return enchereMax.getUtilisateur();
+		}else {
+			return null;
+		}
 	}
 	
 	//methode de creation d'une enchere
 	//mise a jour  du prix de vente de l'article
 	//recreditation de l'utilisateur de la dernière enchere
 	//debit de l'utilisateur enchere
-	public void creationEnchere(int proposition, Utilisateur u, ArticleVendu a) throws Exception {
+	public Enchere creationEnchere(int proposition, Utilisateur u, ArticleVendu a) throws Exception {
 		Enchere enchere = null;
 		int ancierPrixVente = a.getPrixVente();
 		if(proposition>a.getPrixVente()) {
 			//modification du prix de vente de l'article
 			a.setPrixVente(proposition);
-			beanGestionArticle.modifierArticle(a);
+			beanGestionArticle.miseAJourPrixVente(a);
 			
 			//recrediter utilisateur derniere enchere
 			Utilisateur uDernier = dernierUtilisateurEnchere(a);
-			uDernier.setCredit(uDernier.getCredit()+ ancierPrixVente);
-			beanGestionUtilisateur.modifierUtilisateur(uDernier);
-			
+			if(uDernier!=null) {
+				uDernier.setCredit(uDernier.getCredit()+ ancierPrixVente);
+				beanGestionUtilisateur.modifierUtilisateur(uDernier);
+			}
+				
 			//debiter utilisateur enchere 
 			u.setCredit(u.getCredit()-proposition);			
 			beanGestionUtilisateur.modifierUtilisateur(u);
 			
 			//Creation de l'enchere en bdd			
 			enchere = new Enchere(LocalDate.now(),proposition,a,u);
-			Edao.save(enchere);					
-		}		
+			return Edao.save(enchere);					
+		}
+		return null;		
 	}
 }

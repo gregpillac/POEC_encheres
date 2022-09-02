@@ -29,9 +29,9 @@ public class ArticleVendu {
 	@NotNull
 	private LocalDate dateFinEncheres;
 	@NotNull
-	private int miseAPrix;
+	private final int miseAPrix;
 	@NotNull
-	private int prixVente = miseAPrix;
+	private int prixVente;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -48,6 +48,7 @@ public class ArticleVendu {
 	private Retrait retrait;
 	
 	public ArticleVendu() {
+		this.miseAPrix = 0;
 	}
 	
 	public ArticleVendu(@NotNull String nomArticle, @NotNull String description, @NotNull LocalDate dateDebutEncheres,
@@ -60,6 +61,7 @@ public class ArticleVendu {
 		this.vendeur = vendeur;
 		this.categorie = categorie;
 		this.retrait = retrait;
+		setPrixVente(miseAPrix);
 	}
 
 	public ArticleVendu(int noArticle, @NotNull String nomArticle, @NotNull String description,
@@ -106,18 +108,22 @@ public class ArticleVendu {
 	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
+	
+	/**
+	 * @return the miseAPrix
+	 */
 	public int getMiseAPrix() {
 		return miseAPrix;
 	}
-	public void setMiseAPrix(int miseAPrix) {
-		this.miseAPrix = miseAPrix;
-	}
+
 	public int getPrixVente() {
 		return prixVente;
 	}
+
 	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
+
 	public EtatVente getEtatVente() {
 		return etatVente;
 	}

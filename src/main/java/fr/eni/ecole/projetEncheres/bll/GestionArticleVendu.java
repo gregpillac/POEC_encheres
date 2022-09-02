@@ -49,6 +49,18 @@ public class GestionArticleVendu {
 		//TODO : gerer les exceptions de modifArticle ou condition dans Controller
 	}
 	
+	public void miseAJourPrixVente (ArticleVendu art) throws Exception {
+		Optional<ArticleVendu> articleToFind = dao.findById(art.getNoArticle());
+		if (articleToFind.isPresent()) {
+			ArticleVendu article = articleToFind.get();
+			dao.save(art);			
+		} else {
+			throw new Exception("Article non present");
+		}
+		//TODO : gerer les exceptions de modifArticle ou condition dans Controller
+	}
+	
+	
 	public void supprimerArticle (ArticleVendu art) throws Exception {
 		Optional<ArticleVendu> articleToFind = dao.findById(art.getNoArticle());
 		if (articleToFind.isPresent()) {

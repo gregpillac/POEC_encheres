@@ -42,6 +42,7 @@ class GestionArticleTest {
 	@Test
 	void test01CreerUnArticle() {
 		Utilisateur u = beanGestionUser.trouverUtilisateurByLogin("toto");
+		Utilisateur u1 = beanGestionUser.trouverUtilisateurByLogin("tata");
 		assertNotNull(u);
 		assertTrue(u.getNoUtilisateur()>0);
 		System.err.println(u.toString());
@@ -49,9 +50,13 @@ class GestionArticleTest {
 		Categorie c = beanGestionCate.trouverCategorieByLibelle("Loisir");
 		assertNotNull(c);
 		System.err.println(c.toString());
+		Categorie c1 = beanGestionCate.trouverCategorieByLibelle("Autre");
+		Categorie c2 = beanGestionCate.trouverCategorieByLibelle("Informatique");
 		
 		Retrait r = new Retrait("3 rue du Retrait", "79000", "Niort");
 		beanGestionRetrait.creerRetrait(r);
+		Retrait r1 = new Retrait("3 rue du Retrait", "49000", "Cholet");
+		beanGestionRetrait.creerRetrait(r1);
 		
 		ArticleVendu a = new ArticleVendu(
 				"cd",
@@ -66,9 +71,31 @@ class GestionArticleTest {
 				
 		Optional<ArticleVendu> a2 = beanGestionArticle.trouverArticleById(a.getNoArticle());
 		assertNotNull(a2);
-		System.err.println(a2);		
+		System.err.println(a2);	
+		
+		ArticleVendu a1 = new ArticleVendu(
+				"dvd",
+				"dvd Starwars",
+				LocalDate.of(2022, 8, 20),
+				LocalDate.of(2022, 9, 29),
+				10,
+				u,
+				c1,
+				r1);
+		beanGestionArticle.creerArticle(a1);
+		
+		ArticleVendu a3 = new ArticleVendu(
+				"ordinateur",
+				"MAC",
+				LocalDate.of(2022, 8, 20),
+				LocalDate.of(2022, 10, 10),
+				100,
+				u1,
+				c2,
+				r1);
+		beanGestionArticle.creerArticle(a3);
 	}
-	
+	/*
 	@Test
 	void test02ListerArticles() {		
 		List<ArticleVendu> articles = beanGestionArticle.listeArticles();
@@ -151,5 +178,5 @@ class GestionArticleTest {
 
 	}
 
-
+*/
 }

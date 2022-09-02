@@ -129,6 +129,20 @@ public class Enchere {
 		this.utilisateur = utilisateur;
 	}
 
+	
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(article, utilisateur);

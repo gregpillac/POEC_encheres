@@ -1,7 +1,7 @@
 package fr.eni.ecole.projetEncheres;
 
-import java.util.Timer;
-import java.util.TimerTask;
+
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,19 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("fr.eni.ecole.projetEncheres.*")
 public class PoecProjetEncheresApplication {
 
-	public static void main(String[] args) {
-		
-		Timer t  = new Timer();
-		t.schedule(new TimerTask() {
-
-			@Override
-			public void run() {
-				
-				System.out.println("Coucou du timer");
-			}
-			
-		},1000*3600);
-		
+	public static void main(String[] args) {				
 		
 		SpringApplication.run(PoecProjetEncheresApplication.class, args);
 	}
