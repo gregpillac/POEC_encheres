@@ -38,7 +38,7 @@
 			</h1>
 			<h2>${error}</h2>
 			           
-			<form:form cssClass="form-horizontal" modelAttribute="userInSession" method="POST" action="connexion">
+			<form:form cssClass="form-horizontal" modelAttribute="userInSession" method="POST" action="validerConnexion">
 
                 <div class="form-group">
 					<form:label path="email" cssClass="col-xs-2 control-label">

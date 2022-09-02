@@ -9,11 +9,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller 
 public class WelcomeController {
 	
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET) 
+
+	public String Acceuil() { 
+
+	return "welcome"; 
+
+	}
+	
+	/*@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 		public String connecterUtilisateur(ModelMap map) {
 			map.addAttribute("user", "aaa");
 			return "welcome";
 		}
+	
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String deconnecterUtilisateur(ModelMap map) {
+		map.addAttribute("user", "aaa");
+		return "welcome";
+	}*/
 	
 	
 	

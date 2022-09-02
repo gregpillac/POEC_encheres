@@ -31,17 +31,18 @@ public class ConnextionController {
 
 	 
 
-	@RequestMapping(value = "/", method = RequestMethod.GET) 
+	/*@RequestMapping(value = "/", method = RequestMethod.GET) 
 
 	public String connecterUtilisateur() { 
 
 	return "login"; 
 
-	} 
+	} */
 
 	 
 
-	@RequestMapping(value = "/connexion", method = RequestMethod.POST) 
+
+	@RequestMapping(value = "/validerConnexion", method = RequestMethod.POST) 
 
 	public String verfiConnectionUtilisateur(@ModelAttribute("userInSession") Utilisateur user) { 
 
@@ -52,17 +53,29 @@ public class ConnextionController {
 	return "welcome"; 
 
 	} 
-
 	 
 
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET) 
 
 	public String deconnecterUtilisateur(SessionStatus status){ 
 
-	        status.setComplete();		 
+	     status.setComplete();		
+	     //session.
 
-	return "redirect:/";
+	return "welcome";
 }
+	
+	@RequestMapping(value = "/connexion", method = RequestMethod.GET) 
+
+	public String demandeConnexionUtilisateur() { 
+
+	logger.warning("Demande de connexion"); 
+
+	 
+
+	return "login"; 
+
+	} 
 	
 	@Autowired
 	private SessionLocaleResolver localeResolver;

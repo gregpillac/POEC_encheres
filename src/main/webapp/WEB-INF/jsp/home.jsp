@@ -23,7 +23,7 @@
 			<div class="row align-items-cente">
 				<h2 class="text-center">List Des Enchères</h2>
 				</br>
-				<form:form cssClass="form-horizontal" method="POST" action="rechercher">
+				<!--<form:form cssClass="form-horizontal" method="POST" action="rechercher">
 					<div class="col col-lg-6 col-md-12">
 						<div class="col-12">
 
@@ -51,7 +51,7 @@
 					<div class="col col-lg-6 col-md-12">
 						<button type="submit" class="btn btn-primary mb-3">Rechercher</button>
 					</div>
-				</form:form>
+				</form:form>-->
 			</div>
 
 
