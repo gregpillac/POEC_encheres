@@ -1,6 +1,7 @@
 package fr.eni.ecole.projetEncheres.bll;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,41 @@ public class GestionArticleVendu {
 		List<ArticleVendu> articles = dao.findAll();
 		return articles;
 	}
+	
+	public List<ArticleVendu> listeArticlesEnCours() {
+		List<ArticleVendu> articles = dao.findAll();
+		List<ArticleVendu> articlesEnCours = new ArrayList<>();
+		for (ArticleVendu a : articles) {
+			if(a.getEtatVente().equals(EtatVente.ENCOURS)) {
+				articlesEnCours.add(a);
+			}
+		}		
+		return articlesEnCours;
+	}
+	
+	public List<ArticleVendu> listeArticlesEnCoursParNom(String carac) {
+		List<ArticleVendu> articles = listeArticlesEnCours();
+		List<ArticleVendu> articlesParNom = new ArrayList<>();
+		for (ArticleVendu a : articles) {
+			if(a.getNomArticle().contains(carac)) {
+				articlesParNom.add(a);
+			}
+		}		
+		return articlesParNom;
+	}
+	
+	public List<ArticleVendu> listeArticlesEnCoursParCategorie(String libelle) {
+		List<ArticleVendu> articles = listeArticlesEnCours();
+		List<ArticleVendu> articlesParCategorie = new ArrayList<>();
+		for (ArticleVendu a : articles) {
+			if(a.getCategorie().getLibelle().equalsIgnoreCase(libelle)) {
+				articlesParCategorie.add(a);
+			}
+		}		
+		return articlesParCategorie;
+	}
+	
+	
 	
 		
 	public Optional<ArticleVendu> trouverArticleById (int id) {
