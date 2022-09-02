@@ -112,7 +112,7 @@ public class GestionEnchere {
 		if(proposition>a.getPrixVente()) {
 			//modification du prix de vente de l'article
 			a.setPrixVente(proposition);
-			beanGestionArticle.miseAJourPrixVente(a);
+			beanGestionArticle.miseAJourEtatPrixVente(a);
 			
 			//recrediter utilisateur derniere enchere
 			Utilisateur uDernier = dernierUtilisateurEnchere(a);

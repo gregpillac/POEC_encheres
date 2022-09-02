@@ -26,6 +26,7 @@ public class GestionArticleVendu {
 		return articles;
 	}
 	
+		
 	public Optional<ArticleVendu> trouverArticleById (int id) {
 		Optional<ArticleVendu> article = dao.findById(id);
 		/*if (articleTrouve.isPresent()) {
@@ -49,7 +50,7 @@ public class GestionArticleVendu {
 		//TODO : gerer les exceptions de modifArticle ou condition dans Controller
 	}
 	
-	public void miseAJourPrixVente (ArticleVendu art) throws Exception {
+	public void miseAJourEtatPrixVente (ArticleVendu art) throws Exception {
 		Optional<ArticleVendu> articleToFind = dao.findById(art.getNoArticle());
 		if (articleToFind.isPresent()) {
 			ArticleVendu article = articleToFind.get();
@@ -85,11 +86,11 @@ public class GestionArticleVendu {
 		for (ArticleVendu a : articles) {
 			if (a.getDateFinEncheres().isEqual(now) || a.getDateFinEncheres().isBefore(now)) {
 				a.setEtatVente(EtatVente.TERMINEE);
-				modifierArticle(a);
+				miseAJourEtatPrixVente(a);
 				System.err.println("passage en condition termine");
 			} else if (a.getDateDebutEncheres().isEqual(now) || a.getDateDebutEncheres().isBefore(now)) {
 				a.setEtatVente(EtatVente.ENCOURS);
-				modifierArticle(a);
+				miseAJourEtatPrixVente(a);
 				System.err.println("passage en condition en cours");
 			} System.err.println("bordel");
 		}
@@ -97,7 +98,7 @@ public class GestionArticleVendu {
 	
 	public void etatVenteRetire(ArticleVendu art) throws Exception {
 		art.setEtatVente(EtatVente.RETIREE);
-		modifierArticle(art);
+		miseAJourEtatPrixVente(art);
 	}
 	
 }
