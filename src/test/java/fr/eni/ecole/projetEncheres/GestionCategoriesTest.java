@@ -24,7 +24,7 @@ class GestionCategoriesTest {
 
 	@Autowired
     private GestionCategorie beanGestionCategorie;
-
+/*
 	@Test
 	void test00ListerCategorie() {
 		List<Categorie> categories = beanGestionCategorie.listeCategories();
@@ -32,7 +32,7 @@ class GestionCategoriesTest {
 		System.err.println("test01");
 
 	}
-	
+*/	
    @Test
     void test01CreerCategorie() {
         
@@ -57,7 +57,7 @@ class GestionCategoriesTest {
 		System.err.println("test02");
 
     }
-   
+  /* 
    @Test
    void test02SupprimerCategorie() {
 	   Categorie catAsupprimer = new Categorie("Autre");
@@ -66,4 +66,5 @@ class GestionCategoriesTest {
 		System.err.println("test03");
 
    }
+   */
 }

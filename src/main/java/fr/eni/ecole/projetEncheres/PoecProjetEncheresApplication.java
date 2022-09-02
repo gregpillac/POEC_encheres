@@ -16,7 +16,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @EntityScan("fr.eni.ecole.projetEncheres.*")
 public class PoecProjetEncheresApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {				
+		
 		SpringApplication.run(PoecProjetEncheresApplication.class, args);
 	}
 	

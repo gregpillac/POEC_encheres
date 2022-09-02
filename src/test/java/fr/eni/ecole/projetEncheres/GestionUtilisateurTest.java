@@ -2,9 +2,11 @@ package fr.eni.ecole.projetEncheres;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 
-
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +16,7 @@ import fr.eni.ecole.projetEncheres.bo.Utilisateur;
 
 
 @SpringBootTest
+@TestMethodOrder(MethodOrderer.MethodName.class)
 @ComponentScan({ "fr.eni.ecole.projetEncheres.bll",
 	"fr.eni.ecole.projetEncheres.dal",
 	"fr.eni.ecole.projetEncheres.bo"})
@@ -23,7 +26,6 @@ class GestionUtilisateurTest {
 	@Autowired
 	private GestionUtilisateur beanGestionUser;
 	
-/*
 	@Test
 	public void test01CreerUtilisateur() {
 		
@@ -49,7 +51,8 @@ class GestionUtilisateurTest {
 		assertTrue(utilisateurs.size()==2);
 		
 	}
-	*/
+	
+/*
 	@Test
 	public void test02TrouverUnUtilisateurParPseudo() {
 		Utilisateur u = beanGestionUser.trouverUtilisateurByLogin("Toto");
@@ -79,9 +82,5 @@ class GestionUtilisateurTest {
 		toto.setPrenom("Antonin");
 		beanGestionUser.modifierUtilisateur(toto);
 		}
-	
-	
-	
-	
-
+	*/
 }
