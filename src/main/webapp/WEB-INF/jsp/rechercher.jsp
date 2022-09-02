@@ -24,7 +24,7 @@
 		<div class="jumbotron">
 			<div class="row align-items-cente">
 			
-			rechercher
+			rechercher une chose 
 			</div>	
 		</div>
 	</div>
