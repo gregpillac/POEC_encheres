@@ -180,7 +180,7 @@ public class ArticleVendu {
 		builder.append(categorie);
 		builder.append(", retrait=");
 		builder.append(retrait);
-		builder.append("]");
+		builder.append("]\n");
 		return builder.toString();
 	}
 

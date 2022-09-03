@@ -38,7 +38,7 @@ class GestionArticleTest {
 	GestionCategorie beanGestionCate;
 	@Autowired
 	GestionRetrait beanGestionRetrait;
-	
+	/*
 	@Test
 	void test01CreerUnArticle() {
 		Utilisateur u = beanGestionUser.trouverUtilisateurByLogin("toto");
@@ -95,6 +95,7 @@ class GestionArticleTest {
 				r1);
 		beanGestionArticle.creerArticle(a3);
 	}
+	*/
 	/*
 	@Test
 	void test02ListerArticles() {		
@@ -179,4 +180,40 @@ class GestionArticleTest {
 	}
 
 */
+	/*
+	@Test
+	void testlisteArticlesEnCoursParNom() {
+		
+		List<ArticleVendu> articles = beanGestionArticle.listeArticlesEnCours();
+		System.err.println(articles);
+		List<ArticleVendu> articlesParNom=beanGestionArticle.listeArticlesEnCoursParNom("dv");
+		System.err.println(articlesParNom);
+		assertTrue(articles.size()==3);
+		assertTrue(articlesParNom.size()==2);
+		List<ArticleVendu> articlesParNom2=beanGestionArticle.listeArticlesEnCoursParNom("dd");
+		System.err.println(articlesParNom2);		
+		assertTrue(articlesParNom2.size()==0);
+		List<ArticleVendu> articlesParNom3=beanGestionArticle.listeArticlesEnCoursParNom("rd");
+		System.err.println(articlesParNom3);		
+		assertTrue(articlesParNom3.size()==1);
+		List<ArticleVendu> articlesParNom4=beanGestionArticle.listeArticlesEnCoursParNom("x");
+		System.err.println(articlesParNom4);		
+		assertTrue(articlesParNom4.size()==0);
+	}
+	*/
+	@Test
+	void testlisteArticlesEnCoursParCategorie() {
+		
+		List<ArticleVendu> articles = beanGestionArticle.listeArticlesEnCours();
+		System.err.println(articles);
+		List<ArticleVendu> articlesParCategorie=beanGestionArticle.listeArticlesEnCoursParCategorie("autre");
+		System.err.println(articlesParCategorie);
+		assertTrue(articlesParCategorie.size()==2);
+		List<ArticleVendu> articlesParCategorie2=beanGestionArticle.listeArticlesEnCoursParCategorie("informatique");
+		System.err.println(articlesParCategorie2);		
+		assertTrue(articlesParCategorie2.size()==1);
+		List<ArticleVendu> articlesParCategorie3=beanGestionArticle.listeArticlesEnCoursParCategorie("INFORMAtique");
+		System.err.println(articlesParCategorie3);		
+		assertTrue(articlesParCategorie3.size()==1);
+	}
 }

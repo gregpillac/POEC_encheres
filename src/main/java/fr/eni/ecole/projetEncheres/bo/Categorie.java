@@ -2,6 +2,8 @@ package fr.eni.ecole.projetEncheres.bo;
 
 
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -91,6 +93,25 @@ public class Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(libelle, noCategorie);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Categorie other = (Categorie) obj;
+		return Objects.equals(libelle, other.libelle) && noCategorie == other.noCategorie;
+	}
+	
+	
 
 }
 

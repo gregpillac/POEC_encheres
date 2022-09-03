@@ -66,9 +66,9 @@ public class GestionEnchere {
 		List<Enchere> encheres = listerEncheresEnCoursHorsConnexion();		
 		List<Enchere> encheresParCategorie=new ArrayList<>();
 		for (Enchere e : encheres) {
-			if (e.getArticle().getCategorie().getLibelle()==c.getLibelle()){
+			if (e.getArticle().getCategorie().equals(c)){
 				encheresParCategorie.add(e);
-			}
+			}		
 		}		
 		return encheresParCategorie;
 	}
@@ -77,7 +77,7 @@ public class GestionEnchere {
 		List<Enchere> encheres = listerEncheresEnCoursHorsConnexion();		
 		List<Enchere> encheresParNomArticle=new ArrayList<>();
 		for (Enchere e : encheres) {
-			if (e.getArticle().getNomArticle()==a.getNomArticle()){
+			if (e.getArticle().getNomArticle().equals(a.getNomArticle())){
 				encheresParNomArticle.add(e);
 			}
 		}		
@@ -112,7 +112,7 @@ public class GestionEnchere {
 		if(proposition>a.getPrixVente()) {
 			//modification du prix de vente de l'article
 			a.setPrixVente(proposition);
-			beanGestionArticle.miseAJourPrixVente(a);
+			beanGestionArticle.miseAJourEtatPrixVente(a);
 			
 			//recrediter utilisateur derniere enchere
 			Utilisateur uDernier = dernierUtilisateurEnchere(a);

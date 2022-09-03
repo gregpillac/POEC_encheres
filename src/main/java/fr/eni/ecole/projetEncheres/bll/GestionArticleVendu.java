@@ -1,6 +1,7 @@
 package fr.eni.ecole.projetEncheres.bll;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,42 @@ public class GestionArticleVendu {
 		return articles;
 	}
 	
+	public List<ArticleVendu> listeArticlesEnCours() {
+		List<ArticleVendu> articles = dao.findAll();
+		List<ArticleVendu> articlesEnCours = new ArrayList<>();
+		for (ArticleVendu a : articles) {
+			if(a.getEtatVente().equals(EtatVente.ENCOURS)) {
+				articlesEnCours.add(a);
+			}
+		}		
+		return articlesEnCours;
+	}
+	
+	public List<ArticleVendu> listeArticlesEnCoursParNom(String carac) {
+		List<ArticleVendu> articles = listeArticlesEnCours();
+		List<ArticleVendu> articlesParNom = new ArrayList<>();
+		for (ArticleVendu a : articles) {
+			if(a.getNomArticle().contains(carac)) {
+				articlesParNom.add(a);
+			}
+		}		
+		return articlesParNom;
+	}
+	
+	public List<ArticleVendu> listeArticlesEnCoursParCategorie(String libelle) {
+		List<ArticleVendu> articles = listeArticlesEnCours();
+		List<ArticleVendu> articlesParCategorie = new ArrayList<>();
+		for (ArticleVendu a : articles) {
+			if(a.getCategorie().getLibelle().equalsIgnoreCase(libelle)) {
+				articlesParCategorie.add(a);
+			}
+		}		
+		return articlesParCategorie;
+	}
+	
+	
+	
+		
 	public Optional<ArticleVendu> trouverArticleById (int id) {
 		Optional<ArticleVendu> article = dao.findById(id);
 		/*if (articleTrouve.isPresent()) {
@@ -49,7 +86,7 @@ public class GestionArticleVendu {
 		//TODO : gerer les exceptions de modifArticle ou condition dans Controller
 	}
 	
-	public void miseAJourPrixVente (ArticleVendu art) throws Exception {
+	public void miseAJourEtatPrixVente (ArticleVendu art) throws Exception {
 		Optional<ArticleVendu> articleToFind = dao.findById(art.getNoArticle());
 		if (articleToFind.isPresent()) {
 			ArticleVendu article = articleToFind.get();
@@ -85,11 +122,11 @@ public class GestionArticleVendu {
 		for (ArticleVendu a : articles) {
 			if (a.getDateFinEncheres().isEqual(now) || a.getDateFinEncheres().isBefore(now)) {
 				a.setEtatVente(EtatVente.TERMINEE);
-				modifierArticle(a);
+				miseAJourEtatPrixVente(a);
 				System.err.println("passage en condition termine");
 			} else if (a.getDateDebutEncheres().isEqual(now) || a.getDateDebutEncheres().isBefore(now)) {
 				a.setEtatVente(EtatVente.ENCOURS);
-				modifierArticle(a);
+				miseAJourEtatPrixVente(a);
 				System.err.println("passage en condition en cours");
 			} System.err.println("bordel");
 		}
@@ -97,7 +134,7 @@ public class GestionArticleVendu {
 	
 	public void etatVenteRetire(ArticleVendu art) throws Exception {
 		art.setEtatVente(EtatVente.RETIREE);
-		modifierArticle(art);
+		miseAJourEtatPrixVente(art);
 	}
 	
 }
